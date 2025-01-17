@@ -28,22 +28,22 @@ public class ParkingController {
         return ResponseEntity.ok("Available Parking Spaces - %s".formatted(parkingService.getAvailableSpaces()));
     }
 
-    @PostMapping("/checkin/{carNumber}")
+    @PostMapping("/arrival/{carNumber}")
     public ResponseEntity<ParkingSlotView> checkinCar(@PathVariable final String carNumber) {
         return ResponseEntity.ok(parkingService.checkinCar(carNumber));
     }
 
-    @PutMapping("/checkout/{carNumber}")
+    @PutMapping("/departure/{carNumber}")
     public ResponseEntity<ParkingSlotView> checkoutCar(@PathVariable final String carNumber) {
         return ResponseEntity.ok(parkingService.checkoutCar(carNumber));
     }
 
-    @PostMapping("/reserve/{carNumber}")
+    @PostMapping("/reservation/{carNumber}")
     public ResponseEntity<ReservationView> reserveSpace(@PathVariable final String carNumber) {
         return ResponseEntity.ok(parkingService.createReservation(carNumber));
     }
 
-    @PutMapping("/reserve/cancel/{carNumber}")
+    @PutMapping("/reservation/cancelation/{carNumber}")
     public ResponseEntity<ReservationView> cancelReservation(@PathVariable final String carNumber) {
         return ResponseEntity.ok(parkingService.cancelReservation(carNumber));
     }
