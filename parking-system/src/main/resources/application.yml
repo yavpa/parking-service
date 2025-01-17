@@ -1,0 +1,51 @@
+server:
+  port: 8181
+
+dbserver:
+  address: ${DB_VARIABLE:localhost}
+  port: 3306
+  db-name: parking_system
+  user: root
+  password: pass
+
+spring:
+  datasource:
+    url: jdbc:mariadb://${dbserver.address}:${dbserver.port}/${dbserver.db-name}
+    username: ${dbserver.user}
+    password: ${dbserver.password}
+  jpa:
+    database: MYSQL
+    show-sql: false
+    open-in-view: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
+        format_sql: false
+        jdbc:
+          lob:
+            non_contextual_creation: true
+          batch_size: 100
+          batch_versioned_data: true
+          time_zone: UTC
+          order_inserts: true
+        order_updates: true
+        query:
+          in_clause_parameter_padding: true
+
+logging:
+  pattern:
+    console: "%date %thread %green(%level) [%cyan(%logger{10}):%magenta(%line)] %red(%method) | %msg%n"
+
+  level:
+    com:
+      gesund: info
+
+    org:
+      springframework: warn
+      testcontainers: info
+      hibernate:
+        SQL: warn #debug
+        type:
+          descriptor:
+            sql:
+              BasicBinder: warn #trace
